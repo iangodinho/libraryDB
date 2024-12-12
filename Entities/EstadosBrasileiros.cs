@@ -2,14 +2,9 @@
 
 namespace LibraryManagement.Entities
 {
-    public class EstadosBrasileiros
+    public class EstadosBrasileiros:Entity<int>
     {
-        [Key]
-        [MaxLength(2)]
         public string UF { get; set; }
-
-        [Required]
-        [MaxLength(30)]
         public string Estado { get; set; }
 
         public ICollection<Endereco> Enderecos { get; set; }

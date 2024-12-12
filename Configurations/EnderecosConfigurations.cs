@@ -11,9 +11,10 @@ namespace LibraryManagement.Configurations
         {
             builder.HasKey(e => e.Id);
 
-            builder.Property(e => e.UF)
-                   .IsRequired()
-                   .HasMaxLength(2);
+            builder.Property(e => e.Id)
+                   .HasColumnName($"{nameof(Endereco)}Id")
+                   .ValueGeneratedOnAdd()
+                   .IsRequired();
 
             builder.Property(e => e.Logradouro)
                    .IsRequired()
@@ -40,7 +41,26 @@ namespace LibraryManagement.Configurations
 
             builder.HasOne(e => e.EstadosBrasileiros)
                    .WithMany(eb => eb.Enderecos)
-                   .HasForeignKey(e => e.UF);
+                   .HasForeignKey(e => e.EstadosBrasileirosId)
+                   .IsRequired()
+                   .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Property(p => p.DataHoraInclusao)
+                   .IsRequired();
+
+            builder.Property(p => p.UsuarioInclusao)
+                   .HasMaxLength(30)
+                   .IsRequired();
+
+            builder.Property(p => p.DataHoraAlteracao)
+                   .IsRequired();
+
+            builder.Property(p => p.UsuarioAlteracao)
+                   .HasMaxLength(30)
+                   .IsRequired();
+
+            builder.Property(p => p.IsActive)
+                   .IsRequired();
         }
     }
 }

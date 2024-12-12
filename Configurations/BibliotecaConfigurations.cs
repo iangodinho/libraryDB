@@ -11,6 +11,11 @@ namespace LibraryManagement.Configurations
         {
             builder.HasKey(b => b.Id);
 
+            builder.Property(b => b.Id)
+                   .HasColumnName($"{nameof(Biblioteca)}Id")
+                   .ValueGeneratedOnAdd()
+                   .IsRequired();
+
             builder.Property(b => b.NomeBiblioteca)
                    .IsRequired()
                    .HasMaxLength(50);
@@ -25,7 +30,24 @@ namespace LibraryManagement.Configurations
 
             builder.HasOne(b => b.Endereco)
                    .WithMany(e => e.Bibliotecas)
-                   .HasForeignKey(b => b.EnderecoID);
+                   .HasForeignKey(b => b.EnderecoId);
+
+            builder.Property(p => p.DataHoraInclusao)
+                   .IsRequired();
+
+            builder.Property(p => p.UsuarioInclusao)
+                   .HasMaxLength(30)
+                   .IsRequired();
+
+            builder.Property(p => p.DataHoraAlteracao)
+                   .IsRequired();
+
+            builder.Property(p => p.UsuarioAlteracao)
+                   .HasMaxLength(30)
+                   .IsRequired();
+
+            builder.Property(p => p.IsActive)
+                   .IsRequired();
         }
     }
 }

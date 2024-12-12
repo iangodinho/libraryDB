@@ -9,7 +9,16 @@ namespace LibraryManagement.Configurations
     {
         public void Configure(EntityTypeBuilder<Livro> builder)
         {
-            builder.HasKey(l => l.ISBN);
+            builder.HasKey(l => l.Id);
+
+            builder.Property(l => l.Id)
+                   .HasColumnName($"{nameof(Livro)}Id")
+                   .ValueGeneratedOnAdd()
+                   .IsRequired();
+
+            builder.Property(l => l.ISBN)
+                   .IsRequired()
+                   .HasMaxLength(13);
 
             builder.Property(l => l.NomeLivro)
                    .IsRequired()
@@ -20,7 +29,32 @@ namespace LibraryManagement.Configurations
 
             builder.HasOne(l => l.Editora)
                    .WithMany(e => e.Livros)
-                   .HasForeignKey(l => l.EditoraID);
+                   .HasForeignKey(l => l.EditoraId);
+
+            builder.HasMany(g => g.Generos)
+                   .WithMany(l => l.Livros)
+                   .UsingEntity(j => j.ToTable("LivroGeneros"));
+
+            builder.HasOne(a => a.Autor)
+                   .WithMany(l => l.Livros)
+                   .HasForeignKey(a => a.AutorId);
+
+            builder.Property(p => p.DataHoraInclusao)
+                   .IsRequired();
+
+            builder.Property(p => p.UsuarioInclusao)
+                   .HasMaxLength(30)
+                   .IsRequired();
+
+            builder.Property(p => p.DataHoraAlteracao)
+                   .IsRequired();
+
+            builder.Property(p => p.UsuarioAlteracao)
+                   .HasMaxLength(30)
+                   .IsRequired();
+
+            builder.Property(p => p.IsActive)
+                   .IsRequired();
         }
     }
 }

@@ -5,10 +5,7 @@ namespace LibraryManagement.Entities
 {
     public class Autor:Entity<int>
     {
-        [Required]
-        [MaxLength(80)]
         public string NomeAutor { get; set; }
-
-        public ICollection<AutorLivro> AutorLivros { get; set; }
+        public ICollection<Livro> Livros { get; set; }
     }
 }

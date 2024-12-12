@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace LibraryManagement.Entities
+namespace LibraryManagement.Entities.Canceladas
 {
     public class AutorLivro
     {

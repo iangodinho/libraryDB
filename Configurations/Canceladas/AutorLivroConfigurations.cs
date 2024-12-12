@@ -1,9 +1,9 @@
-﻿using LibraryManagement.Entities;
+﻿using LibraryManagement.Entities.Canceladas;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Reflection.Emit;
 
-namespace LibraryManagement.Configurations
+namespace LibraryManagement.Configurations.Canceladas
 {
     public class AutorLivroConfigurations : IEntityTypeConfiguration<AutorLivro>
     {
